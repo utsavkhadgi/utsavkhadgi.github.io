@@ -7,6 +7,11 @@
 			text-align: center;
 		}
 
+		.test{
+			text-decoration: none;
+			color: red;
+		}
+
 	</style>
 
 </head>
@@ -25,14 +30,32 @@
 
 	<h5 id="followersInformation"></h5>
 	<p>
+
+
 		Check me on
 		<a id="githubLink">Github</a>
 	</p>
 
-	
+
+
+
 	<a class="twitter-timeline" data-width="300" data-height="400" href="https://twitter.com/UtsavKhadgi1?ref_src=twsrc%5Etfw">Tweets by UtsavKhadgi1</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
+	
 	</div>
+
+	<div class="main" >
+			<h4 id="repoDesc"> </h4>
+			
+			<p id="repoLink"></p>
+
+			<button onclick="">Previous</button>
+			<button id="next">Next</button>
+		
+
+	</div>
+
+
 
 
 <script type="text/javascript">
@@ -62,9 +85,44 @@
 
 
 	})
+		
+			let x=3;
+
+
+			let a='https://api.github.com/users/utsavkhadgi/repos?page=1&per_page=1'
+
+			function incre(){
+				a='https://api.github.com/users/utsavkhadgi/repos?page=3&per_page=1'
+
+			}
+
+			document.getElementById('next').onclick=incre();
+
+			  fetch(a)
+			  .then(response => response.json())
+			  .then(data => {
+			  	console.log(data)
+			    data.forEach(function(x){
+     			 document.getElementById('repoDesc').innerHTML += "Repository Name: "+x['name']+"<br>Repository URL: <a href='"+x['html_url']+" ' class='test'>"+"Click here"+"</a><br>"+"Description:"+x['description']+"</br>Language:"+x['language']+"</br>Default Branch:"+x['default_branch']+"</br></br></br></br></br>"
+    				})
+  			})
+
+
+
+
+
+
+		
+
+		
+
+
+
 
 
 </script>	
+
+
 
 
 
