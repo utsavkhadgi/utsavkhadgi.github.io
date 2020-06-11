@@ -49,8 +49,12 @@
 			
 			<p id="repoLink"></p>
 
-			<button onclick="">Previous</button>
-			<button id="next">Next</button>
+			
+
+			<button id="prev" onclick="next()">Previous</button>
+			<button id="next" onclick="next()">Next</button>
+
+
 		
 
 	</div>
@@ -86,39 +90,47 @@
 
 	})
 		
-			let x=3;
+			
+			
+			function test(x){
+			
+			let a='https://api.github.com/users/utsavkhadgi/repos?page='+x+'&per_page=1';
 
-
-			let a='https://api.github.com/users/utsavkhadgi/repos?page=1&per_page=1'
-
-			function incre(){
-				a='https://api.github.com/users/utsavkhadgi/repos?page=3&per_page=1'
-
-			}
-
-			document.getElementById('next').onclick=incre();
-
-			  fetch(a)
+   			  fetch(a)
 			  .then(response => response.json())
 			  .then(data => {
 			  	console.log(data)
 			    data.forEach(function(x){
      			 document.getElementById('repoDesc').innerHTML += "Repository Name: "+x['name']+"<br>Repository URL: <a href='"+x['html_url']+" ' class='test'>"+"Click here"+"</a><br>"+"Description:"+x['description']+"</br>Language:"+x['language']+"</br>Default Branch:"+x['default_branch']+"</br></br></br></br></br>"
     				})
-  			})
+  			   })
+
+			  }
+
+			  let x=1;
+			  test(x);
+
+			  function incre(x){
+			  	let c=x;
+			  	c++;
+			  	
+				  	if (c<=3) {
+				  		return c;
+				 	 }else{
+				 	 		document.getElementById('next').innerHTML="prev";
+				 	 		return c-3;
+				 	 }
+			  }
 
 
+			  function next(){
+			    x=incre(x);
+			   test(x);
+
+			  }
 
 
-
-
-		
-
-		
-
-
-
-
+			  
 
 </script>	
 
