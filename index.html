@@ -2,17 +2,7 @@
 <html>
 <head>
 	<title>My Portfolio</title>
-	<style type="text/css">
-		.main{
-			text-align: center;
-		}
-
-		.test{
-			text-decoration: none;
-			color: red;
-		}
-
-	</style>
+	<link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
 <body>
@@ -21,41 +11,59 @@
 
 	</div>
 
-	<div class="main" hidden="" id="mainContainer">
-		<img  height="100" width="100" id="profileImage">
 
-	<h2 id="fullName"></h2>
+
+	<div class="main" hidden="" id="mainContainer">
+
+		<div class="imgName">
+
+			<img  height="150" width="150" id="profileImage">
+
+			<h2 id="fullName"></h2>
+
+		</div>
 
 	<p id="bio"></p>
 
-	<h5 id="followersInformation"></h5>
-	<p>
 
+			<div class="row" id="tests">				
+					<div class="col-12">
+						<div class="col-3" >
+								<h5 id="followersInformation"></h5>
+						</div>
 
-		Check me on
-		<a id="githubLink">Github</a>
-	</p>
+						<div class="col-3" >
+							<div class="github">
+								<div>Check me on</div>
+								<a id="githubLink" class="link">Github</a>
+							</div>
 
+						</div>
 
+						<div class="col-6" id="twitter">
+								<a class="twitter-timeline" data-width="300" data-height="400" href="https://twitter.com/UtsavKhadgi1?ref_src=twsrc%5Etfw">Tweets by UtsavKhadgi1</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+						</div>
 
+					</div>
 
-	<a class="twitter-timeline" data-width="300" data-height="400" href="https://twitter.com/UtsavKhadgi1?ref_src=twsrc%5Etfw">Tweets by UtsavKhadgi1</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+				</div>
 
 	
 	</div>
 
-	<div class="main" >
+
+	<!--------------------------Repos List------------------------------------->
+
+	<div class="mainrepo" hidden="" id="mainrepo" >
+			<h1>My Repos</h1>
+
 			<h4 id="repoDesc"> </h4>
 			
 			<p id="repoLink"></p>
 
 			
-
-			<button id="prev" onclick="next()">Previous</button>
 			<button id="next" onclick="next()">Next</button>
-
-
-		
+			
 
 	</div>
 
@@ -75,13 +83,14 @@
 
 			document.getElementById('fullName').textContent=data['login']
 
-			document.getElementById('bio'). textContent=data['bio']
+			document.getElementById('bio'). textContent="Bio-"+data['bio']
 
-			document.getElementById('followersInformation').textContent=followersInfo
+			document.getElementById('followersInformation').textContent="Followers="+followersCount;
 
 			document.getElementById('githubLink').href=data['html_url']
 
 			document.getElementById('mainContainer').hidden=false;
+			 document.getElementById('mainrepo').hidden=false;
 
 			document.getElementById('loading').hidden=true;
 
@@ -92,44 +101,60 @@
 		
 			
 			
-			function test(x){
-			
-			let a='https://api.github.com/users/utsavkhadgi/repos?page='+x+'&per_page=1';
+			var current_page = 1;
+		    var records_per_page =1;
 
-   			  fetch(a)
-			  .then(response => response.json())
-			  .then(data => {
-			  	console.log(data)
-			    data.forEach(function(x){
-     			 document.getElementById('repoDesc').innerHTML += "Repository Name: "+x['name']+"<br>Repository URL: <a href='"+x['html_url']+" ' class='test'>"+"Click here"+"</a><br>"+"Description:"+x['description']+"</br>Language:"+x['language']+"</br>Default Branch:"+x['default_branch']+"</br></br></br></br></br>"
-    				})
-  			   })
+
+		    function display(current_page,records_per_page){
+					let a='https://api.github.com/users/utsavkhadgi/repos?page='+current_page+'&per_page='+records_per_page;
+
+	   			  fetch(a)
+				  .then(response => response.json())
+				  .then(data => {
+				  	console.log(data)
+				    data.forEach(function(x){
+	     			
+	     				 document.getElementById('repoDesc').innerHTML += "Repository Name: "+x['name']+"<br>Repository URL: <a href='"+x['html_url']+" ' class='link'>"+"Click here"+"</a><br>"+"Description:"+x['description']+"</br>Language:"+x['language']+"</br>Default Branch:"+x['default_branch']+"</br>"
+	    				
+
+	    				})
+
+					    
+
+	  			   })
+
 
 			  }
 
-			  let x=1;
-			  test(x);
 
-			  function incre(x){
-			  	let c=x;
-			  	c++;
-			  	
-				  	if (c<=3) {
-				  		return c;
-				 	 }else{
-				 	 		document.getElementById('next').innerHTML="prev";
-				 	 		return c-3;
-				 	 }
+			  document.getElementById('repoLink').textContent=display(current_page,records_per_page);
+
+			  function incre(current_page){
+			  		var a=current_page;
+			  		a++;
+			  		return a;		
 			  }
 
 
 			  function next(){
-			    x=incre(x);
-			   test(x);
+			  		current_page=incre(current_page);
+			  		if (current_page<=3) {
+			  			document.getElementById('repoLink').textContent=display(current_page,records_per_page);
+			  		}else{
+			  			current_page=current_page-3;
 
+			  			document.getElementById('repoLink').textContent=display(current_page,records_per_page);
+			  		}
+
+			  			
 			  }
 
 
+
+			
+
+			 
+			
 			  
 
 </script>	
