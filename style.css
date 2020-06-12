@@ -1,0 +1,91 @@
+		body{
+			
+			margin: 0;
+			background-color:#72A0C1;
+		}
+
+		.main{
+			
+			font-family: sans-serif;
+			border: 1px solid red;
+			color: white;
+			margin: 10px;
+			padding: 10px;
+			padding-top: 40px;
+			padding-bottom: 40px;
+			text-align: center;
+		}
+
+		#profileImage{
+			border: 2px solid white;
+		}
+
+		#fullName{
+			font-size: 30px;
+		}
+
+
+		 #twitter{
+			border-radius: 10px;
+			margin-top:30px;
+			padding: 10px;
+			
+			
+		}
+
+		#bio{
+			
+			padding: 20px;
+			margin: 0;
+			border: 1px solid white;
+			border-radius: 15px;
+			text-align: left;
+
+		}
+
+		#followersInformation{
+			background-color:#ff5f6d → #ffc371;
+			border: 1px solid white;
+			border-radius: 15px;
+			width: 80px;
+			height: 20px;
+			padding:20px;
+			margin-left: 0;
+			
+		}
+
+		.main .github{
+			
+			border: 1px solid white;
+			border-radius: 15px;
+			width: 100px;
+			height: 40px;
+			padding:20px;
+			margin: 0;
+			margin-top: 0;
+			text-align: center;
+		}
+
+		.link{
+			text-decoration: none;
+		}
+
+		.mainrepo{
+			border: 1px solid red;
+			text-align: center;
+			padding: 10px;
+			margin: 10px;
+			color: white;
+			font-family: sans-serif;
+			font-size: 20px;
+		}
+
+		.mainrepo h4{
+			padding:20px;
+			margin: 20px;
+		}
+		.mainrepo button{
+			padding: 15px;
+		}
+
+		
